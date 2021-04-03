@@ -1,0 +1,15 @@
+<div class="center d-flex justify-content-center">
+  <mat-card class="selected-card">
+    <div class="image-container h-100">
+      <img class="selected-image" [src]='selectedRamen.image' alt="Ramen">
+      <div class="ml-2 w-100">
+        <h3 class="title capitalize">{{selectedRamen.variety}}</h3>
+        <p class="capitalize">Brand: {{selectedRamen.brand}}</p>
+        <p class="capitalize">Country: {{selectedRamen.country}}</p>
+        <p class="capitalize">Top Ten: {{selectedRamen.topTen}}</p>
+        <p class="capitalize">Rating: {{selectedRamen.stars}}</p>
+        <p class="capitalize">Style: {{selectedRamen.style}}</p>
+      </div>
+    </div>
+  </mat-card>
+</div>

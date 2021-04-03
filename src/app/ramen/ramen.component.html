@@ -1,0 +1,53 @@
+<div class="container">
+  <div style="text-align: center;">
+    <mat-form-field appearance="standard" floatLabel='always'>
+      <mat-label>Search by brand</mat-label>
+      <input matInput type="search" [formControl]="searchByBrandControl" />
+    </mat-form-field>
+    <mat-form-field floatLabel='always' appearance="standard" class="ml-2">
+      <mat-label>Sort by ratings</mat-label>
+      <mat-select (selectionChange)="onChange($event)" [(ngModel)]="selectedSortValue">
+        <mat-option value='0'>Ascending</mat-option>
+        <mat-option value="1">Descending</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <ng-container *ngIf="filter.length > 0; else loading">
+    <div class="d-flex flex-wrap justify-content-between">
+      <mat-card class="card" *ngFor="let ramen of filter; let i = index" (click)="selectedRamen(ramen, i)">
+        <ng-container *ngIf="images">
+          <div class="image-container h-100">
+            <img class="image" [src]='images[i % images.length].image' alt="Ramen">
+            <div class="ml-2 w-100">
+              <h3 class="title capitalize">{{ramen.variety}}</h3>
+              <div class="subtitle d-flex justify-content-between">
+                <span class="capitalize">Brand: {{ramen.brand}}</span>
+                <ng-container *ngIf="ramen.stars; else noRating">
+                  <div style="width: 25%; cursor: pointer;" [title]="ramen.stars">
+                    <div class="stars" [style.width.px]="getStarWidth(ramen.stars)">
+                      <div style="color: orange; width: 60px;">
+                        <span class="material-icons each-star-size">star_rate</span>
+                        <span class="material-icons each-star-size">star_rate</span>
+                        <span class="material-icons each-star-size">star_rate</span>
+                        <span class="material-icons each-star-size">star_rate</span>
+                        <span class="material-icons each-star-size">star_rate</span>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-template #noRating> <span>No Rating</span></ng-template>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </mat-card>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="d-flex justify-content-center center">
+      <mat-spinner></mat-spinner>
+    </div>
+  </ng-template>
+
+</div>
