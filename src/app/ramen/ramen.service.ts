@@ -28,7 +28,7 @@ export class RamenService {
         variety: serverRamen.Variety,
         style: serverRamen.Style,
         country: serverRamen.Country,
-        stars: Number.isInteger(serverRamen.Stars) ? serverRamen.Stars : 0,
+        stars: isNaN(serverRamen.Stars) ? 0 : serverRamen.Stars,
         topTen: serverRamen['Top Ten'],
       }))
     ));
